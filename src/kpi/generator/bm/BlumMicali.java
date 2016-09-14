@@ -1,5 +1,6 @@
 package kpi.generator.bm;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,20 +8,19 @@ import java.util.Random;
 public class BlumMicali {
 
     //public static final long Q = 0x675215CC3E227D3216C056CFA8F8822BB486F788641E85E0DE77097E1DB049F1;
-    private long a;
-    private long p;
-    private long T;
+    private BigInteger a;
+    private BigInteger p;
+    private BigInteger T;
     List<Integer> output = new ArrayList<>();
 
-    BlumMicali(long a, long p) {
+    BlumMicali(BigInteger a, BigInteger p) {
         this.a = a;
         this.p = p;
-        Random random = new Random();
-        T = random.nextLong() % p;
+        T = new BigInteger("324267");
     }
 
     public void step() {
-        T = ApowTmodP();
+        T = a.modPow(T, p);
         output.add(checkT());
     }
 
@@ -31,46 +31,33 @@ public class BlumMicali {
     }
 
     protected Integer checkT() {
-        if (T < (p - 1)/2) {
+        if ((p.subtract(new BigInteger("1"))).divide(new BigInteger("2")).compareTo(T) > 0) {
             return 1;
         } else
             return 0;
     }
 
-    public long ApowTmodP() {
-        long localT = T;
-        long result = 1;
-
-        while(localT > 0){
-            if(localT % 2 == 1)
-                result = result*a % p;
-            localT = (long)Math.floor((double)localT/2);
-            a = a*a % p;
-        }
-        return result;
-    }
-
-    public long getA() {
+    public BigInteger getA() {
         return a;
     }
 
-    public void setA(long a) {
+    public void setA(BigInteger a) {
         this.a = a;
     }
 
-    public long getP() {
+    public BigInteger getP() {
         return p;
     }
 
-    public void setP(long p) {
+    public void setP(BigInteger p) {
         this.p = p;
     }
 
-    public long getT() {
+    public BigInteger getT() {
         return T;
     }
 
-    public void setT(long t) {
+    public void setT(BigInteger t) {
         T = t;
     }
 

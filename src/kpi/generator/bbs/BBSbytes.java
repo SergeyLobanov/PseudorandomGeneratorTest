@@ -1,19 +1,16 @@
 package kpi.generator.bbs;
 
+import java.math.BigInteger;
+
 public class BBSbytes extends BBS {
 
-    public BBSbytes(long p, long q) {
+    public BBSbytes(BigInteger p, BigInteger q) {
         super(p, q);
-    }
-
-    public void step() {
-        r = r*r % n;
-        output.add(newOut());
     }
 
     @Override
     public int newOut() {
-        long out = getR() % 256;
-        return (int) out;
+        BigInteger out = getR().remainder(new BigInteger("256"));
+        return out.intValue();
     }
 }

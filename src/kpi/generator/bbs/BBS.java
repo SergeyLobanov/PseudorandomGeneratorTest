@@ -1,27 +1,28 @@
 package kpi.generator.bbs;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class BBS {
 
-    private long p;
-    private long q;
-    protected long n;
-    protected long r;
+    private BigInteger p;
+    private BigInteger q;
+    protected BigInteger n;
+    protected BigInteger r;
     protected List<Integer> output;
 
-    public BBS(long p, long q) {
+    public BBS(BigInteger p, BigInteger q) {
         this.p = p;
         this.q = q;
-        this.n = p*q;
-        this.r = (new Random().nextInt() + 2);
+        this.n = p.multiply(q);
+        this.r = new BigInteger((new Random().nextInt() + 2) + "");
         output = new ArrayList<>();
     }
 
     public void step() {
-        r = r*r % n;
+        r = r.multiply(r).remainder(n);
         output.add(newOut());
     }
 
@@ -31,40 +32,40 @@ public class BBS {
         }
     }
     public int newOut() {
-        long out = r % 2;
-        return (int)out;
+        BigInteger out = r.remainder(new BigInteger("2"));
+        return out.intValue();
     }
 
-    public long getP() {
+    public BigInteger getP() {
         return p;
     }
 
-    public void setP(long p) {
+    public void setP(BigInteger p) {
         this.p = p;
     }
 
-    public long getQ() {
+    public BigInteger getQ() {
         return q;
     }
 
-    public void setQ(long q) {
+    public void setQ(BigInteger q) {
         this.q = q;
     }
 
-    public long getR() {
-        return r;
-    }
-
-    public void setR(long r) {
-        this.r = r;
-    }
-
-    public long getN() {
+    public BigInteger getN() {
         return n;
     }
 
-    public void setN(long n) {
+    public void setN(BigInteger n) {
         this.n = n;
+    }
+
+    public BigInteger getR() {
+        return r;
+    }
+
+    public void setR(BigInteger r) {
+        this.r = r;
     }
 
     public List<Integer> getOutput() {
