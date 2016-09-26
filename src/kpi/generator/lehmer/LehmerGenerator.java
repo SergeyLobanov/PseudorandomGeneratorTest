@@ -1,10 +1,12 @@
 package kpi.generator.lehmer;
 
+import kpi.generator.Generetor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //Linear congruential generator
-public abstract class LehmerGenerator {
+public abstract class LehmerGenerator implements Generetor{
     private int a = (1 << 16) + 1;
     private int c = 119;
     private long m = 1L << 32;
@@ -105,4 +107,5 @@ public abstract class LehmerGenerator {
         generatedSequence.add(x0);
         generatedElements.add(getGeneratedBytes(getX0()));
     }
+
 }

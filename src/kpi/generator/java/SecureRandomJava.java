@@ -1,16 +1,37 @@
 package kpi.generator.java;
 
+import kpi.generator.Generetor;
+
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SecureRandomJava {
+public class SecureRandomJava implements Generetor{
 
-    public static void main(String[] args) {
+    private byte[] bytes;
+    private List<Integer> output;
+
+    public SecureRandomJava() {
+        this.output = new ArrayList<>();
+    }
+
+    public void generate(int size) {
         SecureRandom rng = new SecureRandom();
         rng.setSeed(System.currentTimeMillis());
-        byte[] randomBytes = new byte[20];
-        rng.nextBytes(randomBytes);
-        for (int i = 0; i < 20; i++) {
-            System.out.println(randomBytes[i]);
+        bytes = new byte[size];
+        rng.nextBytes(bytes);
+    }
+
+    public List<Integer> getOutputBytes() {
+        for (int i : bytes) {
+            output.add(i + 128);
         }
+        return output;
+    }
+
+    @Override
+    public List<Integer> generateMBytes(int m) {
+        generate(m);
+        return getOutputBytes();
     }
 }

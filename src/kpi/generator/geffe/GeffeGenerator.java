@@ -1,20 +1,25 @@
 package kpi.generator.geffe;
 
+import kpi.generator.Generetor;
+import kpi.util.BitConverter;
 import kpi.util.LFSR;
 
-public class GeffeGenerator {
+import java.util.ArrayList;
+import java.util.List;
+
+public class GeffeGenerator implements Generetor{
     // linear feedback shift registers
     private LFSR lfsr1;
     private LFSR lfsr2;
     private LFSR lfsr3;
     // gammas
-    private StringBuffer gamma;
+    private List<Integer> gamma;
 
     public GeffeGenerator(LFSR lfsr1, LFSR lfsr2, LFSR lfsr3) {
         this.lfsr1 = lfsr1;
         this.lfsr2 = lfsr2;
         this.lfsr3 = lfsr3;
-        this.gamma = new StringBuffer();
+        this.gamma = new ArrayList<>();
     }
 
     public int step() {
@@ -23,8 +28,8 @@ public class GeffeGenerator {
         int s = lfsr3.shift();
 
         int out = (s & x) ^ ((1 ^ s) & y);
-        //System.out.println("x "+x+" y "+y+" s "+s+" out "+out+"     ");
-        gamma.append(out);
+
+        gamma.add(out);
 
         return out;
     }
@@ -35,7 +40,18 @@ public class GeffeGenerator {
         }
     }
 
-    public String getGamma() {
-        return gamma.toString();
+    public List<Integer> getGamma() {
+        return gamma;
+    }
+
+
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(gamma);
+    }
+
+    @Override
+    public List<Integer> generateMBytes(int m) {
+        step(m*8);
+        return getBytesOutput();
     }
 }

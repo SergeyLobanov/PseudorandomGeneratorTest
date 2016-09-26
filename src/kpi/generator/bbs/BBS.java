@@ -1,11 +1,14 @@
 package kpi.generator.bbs;
 
+import kpi.generator.Generetor;
+import kpi.util.BitConverter;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BBS {
+public class BBS implements Generetor{
 
     private BigInteger p;
     private BigInteger q;
@@ -31,9 +34,20 @@ public class BBS {
             step();
         }
     }
+
     public int newOut() {
         BigInteger out = r.remainder(new BigInteger("2"));
         return out.intValue();
+    }
+
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(output);
+    }
+
+    @Override
+    public List<Integer> generateMBytes(int m) {
+        step(m*8);
+        return getBytesOutput();
     }
 
     public BigInteger getP() {

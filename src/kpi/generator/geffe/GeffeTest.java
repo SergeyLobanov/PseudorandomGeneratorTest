@@ -1,5 +1,6 @@
 package kpi.generator.geffe;
 
+import kpi.util.BitConverter;
 import kpi.util.Initializer;
 import kpi.util.LFSR;
 
@@ -17,9 +18,10 @@ public class GeffeTest {
 
         GeffeGenerator geffe = new GeffeGenerator(lfsr1, lfsr2, lfsr3);
 
-        geffe.step(50);
-
-        System.out.println(geffe.getGamma());
+//        geffe.step(50);
+//        System.out.println(geffe.getGamma());
+//        System.out.println(geffe.getBytesOutput());
+        System.out.println(geffe.generateMBytes(100));
 
     }
 }

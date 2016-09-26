@@ -1,19 +1,20 @@
 package kpi.generator.bm;
 
+import kpi.generator.Generetor;
+import kpi.util.BitConverter;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlumMicali {
-
-    //public static final long Q = 0x675215CC3E227D3216C056CFA8F8822BB486F788641E85E0DE77097E1DB049F1;
+public class BlumMicali implements Generetor{
     private BigInteger a;
     private BigInteger p;
     private BigInteger T;
     List<Integer> output = new ArrayList<>();
 
-    BlumMicali(BigInteger a, BigInteger p) {
+    public BlumMicali(BigInteger a, BigInteger p) {
         this.a = a;
         this.p = p;
         T = new BigInteger("324267");
@@ -35,6 +36,16 @@ public class BlumMicali {
             return 1;
         } else
             return 0;
+    }
+
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(output);
+    }
+
+    @Override
+    public List<Integer> generateMBytes(int m) {
+        step(m*8);
+        return getBytesOutput();
     }
 
     public BigInteger getA() {
@@ -63,9 +74,5 @@ public class BlumMicali {
 
     public List<Integer> getOutput() {
         return output;
-    }
-
-    public void setOutput(List<Integer> output) {
-        this.output = output;
     }
 }

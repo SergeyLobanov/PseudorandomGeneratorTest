@@ -9,19 +9,21 @@ public class LehmerMain {
 
         System.out.println("LehmerLow");
         LehmerLow lehmerLow = new LehmerLow();
-        System.out.println(lehmerLow.getGeneratedSequence());
-        lehmerLow.generateSequence(20);
-        for (Integer value: lehmerLow.getGeneratedElements()) {
-            System.out.println(Long.toBinaryString(value));
-        }
+//        lehmerLow.generateSequence(20);
+//        System.out.println(lehmerLow.getGeneratedElements());
+//        for (Integer value: lehmerLow.getGeneratedElements()) {
+//            System.out.println(Long.toBinaryString(value));
+//        }
+        System.out.println(lehmerLow.generateMBytes(100));
 
         System.out.println("LehmerHigh");
         LehmerHigh lehmerHigh = new LehmerHigh();
         lehmerHigh.setX0(123123123);
-        System.out.println(lehmerHigh.getGeneratedSequence());
-        lehmerHigh.generateSequence(20);
-        for (Integer value: lehmerHigh.getGeneratedElements()) {
-            System.out.println(Long.toBinaryString(value));
-        }
+//        lehmerHigh.generateSequence(20);
+//        System.out.println(lehmerHigh.getGeneratedElements());
+//        for (Integer value: lehmerHigh.getGeneratedElements()) {
+//            System.out.println(Long.toBinaryString(value));
+//        }
+        System.out.println(lehmerHigh.generateMBytes(100));
     }
 }

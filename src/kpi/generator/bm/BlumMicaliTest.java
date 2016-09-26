@@ -1,5 +1,7 @@
 package kpi.generator.bm;
 
+import kpi.util.BitConverter;
+
 import java.math.BigInteger;
 
 public class BlumMicaliTest {
@@ -11,11 +13,14 @@ public class BlumMicaliTest {
 
 
         BlumMicali blumMicali = new BlumMicali(A, P);
-        blumMicali.step(100);
-        System.out.println(blumMicali.getOutput());
+//        blumMicali.step(100);
+//        System.out.println(blumMicali.getOutput());
+//        System.out.println(blumMicali.getBytesOutput());
+        System.out.println(blumMicali.generateMBytes(100));//x8
 
         BlumMicaliBytes blumMicaliBytes = new BlumMicaliBytes(A, P);
-        blumMicali.step(100);
-        System.out.println(blumMicali.getOutput());
+        //blumMicaliBytes.step(100);
+        //System.out.println(blumMicaliBytes.getOutput());
+        System.out.println(blumMicaliBytes.generateMBytes(100));
     }
 }
