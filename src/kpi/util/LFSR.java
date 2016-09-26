@@ -1,9 +1,12 @@
 package kpi.util;
 
+import kpi.generator.Generetor;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class LFSR {
+public class LFSR implements Generetor{
     // characteristic polynomial of lfsr
     private long polynomial;
     // characteristic polynomial
@@ -53,6 +56,10 @@ public class LFSR {
         }
     }
 
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesListFromBitsString(outputSequence.toString());
+    }
+
     public HashMap<Long, String> getCandidates() {
         return candidates;
     }
@@ -97,5 +104,11 @@ public class LFSR {
 
     public String getOutputSequence() {
         return outputSequence.toString();
+    }
+
+    @Override
+    public List<Integer> generateMBytes(int m) {
+        shift(m*8);
+        return getBytesOutput();
     }
 }

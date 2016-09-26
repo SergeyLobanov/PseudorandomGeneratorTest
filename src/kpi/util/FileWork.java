@@ -1,12 +1,15 @@
 package kpi.util;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 
 public class FileWork {
 
     public static String readFile(String file) {
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {//, "Cp1251"
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
 
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -21,6 +24,23 @@ public class FileWork {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static List<Integer> readBytesFromFile(String file) {
+
+        try (InputStream inputStream = new FileInputStream(file)){
+            List<Integer> byteList = new ArrayList<>();
+            int oneByte = inputStream.read();
+
+            while (oneByte != -1) {
+                byteList.add(oneByte);
+                oneByte = inputStream.read();
+            }
+            return byteList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     public void writeFile(String fileName, String text) {
