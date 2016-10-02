@@ -17,7 +17,7 @@ public class BigInitializer {
             this.degree = coefficients[0];
             this.value = new BigInteger("1");
             for (int i : coefficients) {
-                this.value.xor(BigInteger.valueOf((long)1 << i));
+                value = value.xor(BigInteger.valueOf((long)1 << i));
             }
         }
     }

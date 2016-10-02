@@ -51,11 +51,6 @@ public class BigLFSR implements Generetor{
     // n - shifts of register
     public void shift(int n) {
         for (int i = 0; i < n; i++) {
-//            if(i%5000000==0) {
-//                System.out.println(i);
-//                System.out.println(currentState);
-//                System.out.println(getBytesOutput());
-//            }
             shift();
         }
     }
